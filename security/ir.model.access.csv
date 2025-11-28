@@ -1,3 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_analytic_custom_plan,analytic.custom.plan.access,model_analytic_custom_plan,base.group_user,1,1,1,1
-access_analytic_custom_tag,analytic.custom.tag.access,model_analytic_custom_tag,base.group_user,1,1,1,1
+access_tag_sequence_collection,tag.sequence.collection.access,model_tag_sequence_collection,base.group_user,1,1,1,1
+access_tag_sequence_item,tag.sequence.item.access,model_tag_sequence_item,base.group_user,1,1,1,1

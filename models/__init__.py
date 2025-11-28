@@ -1,1 +1,1 @@
-from . import analytic_structure
+from . import sequence_manager

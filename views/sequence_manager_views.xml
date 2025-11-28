@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- LIST VIEW: ITEMS INLINE -->
+    <record id="view_tag_sequence_item_list_inline" model="ir.ui.view">
+        <field name="name">tag.sequence.item.list.inline</field>
+        <field name="model">tag.sequence.item</field>
+        <field name="arch" type="xml">
+            <list editable="bottom" multi_edit="1">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="analytic_tag_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- FORM VIEW: COLLECTION (PARENT) -->
+    <record id="view_tag_sequence_collection_form" model="ir.ui.view">
+        <field name="name">tag.sequence.collection.form</field>
+        <field name="model">tag.sequence.collection</field>
+        <field name="arch" type="xml">
+            <form string="Colección de Secuencias">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name" placeholder="Ej: Cliente Renault"/></h1>
+                    </div>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                    <notebook>
+                        <page string="Secuencias">
+                            <field name="sequence_ids">
+                                <list editable="bottom">
+                                    <field name="code"/>
+                                    <field name="name"/>
+                                    <field name="analytic_tag_ids" widget="many2many_tags" options="{'no_create': False}"/>
+                                    <field name="active" widget="boolean_toggle"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- LIST VIEW: COLLECTION -->
+    <record id="view_tag_sequence_collection_list" model="ir.ui.view">
+        <field name="name">tag.sequence.collection.list</field>
+        <field name="model">tag.sequence.collection</field>
+        <field name="arch" type="xml">
+            <list string="Colecciones">
+                <field name="name"/>
+                <field name="description"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- LIST VIEW: ALL ITEMS -->
+    <record id="view_tag_sequence_item_list" model="ir.ui.view">
+        <field name="name">tag.sequence.item.list</field>
+        <field name="model">tag.sequence.item</field>
+        <field name="arch" type="xml">
+            <list string="Todas las Secuencias" editable="bottom">
+                <field name="collection_id" optional="show"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="analytic_tag_ids" widget="many2many_tags"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- SEARCH VIEW -->
+    <record id="view_tag_sequence_item_search" model="ir.ui.view">
+        <field name="name">tag.sequence.item.search</field>
+        <field name="model">tag.sequence.item</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Secuencias">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="analytic_tag_ids"/>
+                <field name="collection_id"/>
+                <filter string="Archivado" name="archived" domain="[('active', '=', False)]"/>
+                <group expand="1" string="Agrupar Por">
+                    <filter string="Colección" name="group_by_collection" context="{'group_by':'collection_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ACTIONS -->
+    <record id="action_tag_sequence_collection" model="ir.actions.act_window">
+        <field name="name">Colección Secuencias</field>
+        <field name="res_model">tag.sequence.collection</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_tag_sequence_item" model="ir.actions.act_window">
+        <field name="name">Todas las Secuencias</field>
+        <field name="res_model">tag.sequence.item</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_group_by_collection': 1}</field>
+    </record>
+
+    <!-- MENUS -->
+    <menuitem id="menu_tag_sequence_collection" 
+              name="Colección Secuencias"
+              parent="account.menu_analytic_accounting" 
+              action="action_tag_sequence_collection" 
+              sequence="50"/>
+
+    <menuitem id="menu_tag_sequence_item" 
+              name="Todas las Secuencias"
+              parent="account.menu_analytic_accounting" 
+              action="action_tag_sequence_item" 
+              sequence="51"/>
+
+</odoo>

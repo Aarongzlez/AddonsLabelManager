@@ -1,15 +1,15 @@
 {
-    'name': 'Plan Contable Analítico Personalizado',
-    'version': '18.0.1.0.6',
+    'name': 'Tag Sequence Manager',
+    'version': '18.0.1.0.0',
     'category': 'Accounting/Analytic',
-    'summary': 'Gestión de planes analíticos y etiquetas personalizadas por cliente',
+    'summary': 'Gestor de colecciones y secuencias de etiquetas analíticas',
     'author': 'Assistant',
-    'depends': ['base', 'account'], 
+    'depends': ['base', 'account'],
     'data': [
         'security/ir.model.access.csv',
-        'views/analytic_structure_views.xml',
+        'views/sequence_manager_views.xml',
     ],
     'installable': True,
-    'application': True,
+    'application': False,
     'license': 'LGPL-3',
 }

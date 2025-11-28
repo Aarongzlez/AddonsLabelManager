@@ -1,6 +1,6 @@
-plan_id,code,name,analytic_tag_ids,active
-Renault,001,Gastos Generales,"M.Renault,Mod.Kona",1
-Renault,002,Marketing,"M.Renault,Mod.Kona",1
-Porsche,001,Ingeniería Motor,"M.Porsche,Mod.Kona",1
-Dacia,002,Competición,"M.Renault,Mod.Kona",0
-Dacia,001,Logística,"M.Renault,Mod.Kona",1
+collection_id,code,name,analytic_tag_ids,active
+Renault,001,Gastos Generales,"EtiquetaAdmin,EtiquetaGeneral",1
+Renault,002,Marketing,EtiquetaMarketing,1
+Porsche,001,Ingeniería Motor,"EtiquetaI+D,EtiquetaMotor",1
+Porsche,002,Competición,"EtiquetaCarreras,EtiquetaMotor",0
+Dacia,001,Logística,EtiquetaLogistica,1
