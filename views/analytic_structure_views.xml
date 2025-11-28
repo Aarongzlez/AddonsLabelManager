@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- 1. Vista List de las Etiquetas (Definida primero para ser referenciada) -->
+    <record id="view_analytic_custom_tag_list_inline" model="ir.ui.view">
+        <field name="name">analytic.custom.tag.list.inline</field>
+        <field name="model">analytic.custom.tag</field>
+        <field name="arch" type="xml">
+            <list editable="bottom" multi_edit="1">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="tag_sequence"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- 2. Formulario del Plan (Padre) -->
+    <record id="view_analytic_custom_plan_form" model="ir.ui.view">
+        <field name="name">analytic.custom.plan.form</field>
+        <field name="model">analytic.custom.plan</field>
+        <field name="arch" type="xml">
+            <form string="Plan Analítico">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name" placeholder="Ej: Plan Renault 2024"/></h1>
+                    </div>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                    <notebook>
+                        <page string="Etiquetas Analíticas">
+                            <!-- Usamos <list> dentro del campo One2many también -->
+                            <field name="tag_ids">
+                                <list editable="bottom">
+                                    <field name="code"/>
+                                    <field name="name"/>
+                                    <field name="tag_sequence"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- 3. Lista del Plan -->
+    <record id="view_analytic_custom_plan_list" model="ir.ui.view">
+        <field name="name">analytic.custom.plan.list</field>
+        <field name="model">analytic.custom.plan</field>
+        <field name="arch" type="xml">
+            <list string="Planes Analíticos">
+                <field name="name"/>
+                <field name="description"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- 4. Vista List General de Etiquetas (con filtro) -->
+    <record id="view_analytic_custom_tag_list" model="ir.ui.view">
+        <field name="name">analytic.custom.tag.list</field>
+        <field name="model">analytic.custom.tag</field>
+        <field name="arch" type="xml">
+            <list string="Etiquetas" editable="bottom">
+                <field name="plan_id" optional="show"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="tag_sequence"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- 5. Search View -->
+    <record id="view_analytic_custom_tag_search" model="ir.ui.view">
+        <field name="name">analytic.custom.tag.search</field>
+        <field name="model">analytic.custom.tag</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Etiquetas">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="tag_sequence"/>
+                <field name="plan_id"/>
+                <group expand="1" string="Agrupar Por">
+                    <filter string="Plan / Cliente" name="group_by_plan" context="{'group_by':'plan_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ACCIONES -->
+    <record id="action_analytic_custom_plan" model="ir.actions.act_window">
+        <field name="name">Planes Contables</field>
+        <field name="res_model">analytic.custom.plan</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_analytic_custom_tag" model="ir.actions.act_window">
+        <field name="name">Todas las Etiquetas</field>
+        <field name="res_model">analytic.custom.tag</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_group_by_plan': 1}</field>
+    </record>
+
+    <!-- MENÚS -->
+    <menuitem id="menu_analytic_custom_root" 
+              name="Analítica Custom" 
+              web_icon="base,static/description/icon.png" 
+              sequence="10"/>
+
+    <menuitem id="menu_analytic_plans" 
+              parent="menu_analytic_custom_root" 
+              action="action_analytic_custom_plan" 
+              sequence="10"/>
+
+    <menuitem id="menu_analytic_tags" 
+              parent="menu_analytic_custom_root" 
+              action="action_analytic_custom_tag" 
+              sequence="20"/>
+
+</odoo>
