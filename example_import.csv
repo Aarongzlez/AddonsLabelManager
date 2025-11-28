@@ -1,2 +1,6 @@
-plan_id,code,name,analytic_tag_ids
-RENAULT,A210,Gastos especificos,"M.Porsche,M.Renault,Mod.911,Yeison"
+plan_id,code,name,analytic_tag_ids,active
+Renault,001,Gastos Generales,"M.Renault,Mod.Kona",1
+Renault,002,Marketing,"M.Renault,Mod.Kona",1
+Porsche,001,Ingeniería Motor,"M.Porsche,Mod.Kona",1
+Dacia,002,Competición,"M.Renault,Mod.Kona",0
+Dacia,001,Logística,"M.Renault,Mod.Kona",1
